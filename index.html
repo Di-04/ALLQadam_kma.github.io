@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="kk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALLQadam - Жас педагогтерге арналған қолдау платформасы</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            purple: '#6b21a8',
+                            gold: '#d97706'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Interactive animated logo canvas styling */
+        #logoCanvas {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Custom scrollbars */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom animation for mottos */
+        .gradient-text {
+            background: linear-gradient(135deg, #0284c7 0%, #4f46e5 50%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-card shadow-sm border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Header Photo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="relative overflow-hidden rounded-xl border border-sky-200 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1KFiPw-R002Wjd_ZdhaCs5DQFZvLBI42L" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/120x60/0284c7/ffffff?text=ALLQADAM'" 
+                         alt="ALLQadam Logo" 
+                         class="h-12 w-auto object-cover">
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900 block leading-none">ALLQADAM</span>
+                    <span class="text-xs font-semibold text-sky-600 tracking-wider uppercase block mt-1" id="navSubtitle">Жас мамандар қауымдастығы</span>
+                </div>
+            </a>
+
+            <!-- Quick Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-sky-600 transition" id="navAbout">Біз туралы</a>
+                <a href="#admin" class="hover:text-sky-600 transition" id="navAdmin">Әкімшілік</a>
+                <a href="#creators" class="hover:text-sky-600 transition" id="navCreators">Құрушылар</a>
+                <a href="#young-teachers" class="hover:text-sky-600 transition" id="navYoungTeachers">Жас ұстаздар мектебі</a>
+                <a href="#checklist" class="hover:text-sky-600 transition" id="navChecklist">Шек-лист</a>
+                <a href="#qualification" class="hover:text-sky-600 transition" id="navQualification">Біліктілік</a>
+                <a href="#base" class="hover:text-sky-600 transition" id="navBase">Материалдар</a>
+                <a href="#events" class="hover:text-sky-600 transition" id="navEvents">Іс-шаралар</a>
+                <a href="#nqa" class="hover:text-sky-600 transition" id="navNqa">НҚА</a>
+            </nav>
+
+            <!-- Language Switcher Buttons -->
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex gap-1 shadow-inner">
+                    <button id="langKZ" onclick="switchLanguage('kz')" 
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 bg-sky-600 text-white shadow">
+                        KZ
+                    </button>
+                    <button id="langRU" onclick="switchLanguage('ru')" 
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 text-slate-600 hover:text-slate-900">
+                        RUS
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Біз туралы / О нас</a>
+            <a href="#admin" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Әкімшілік / Администрация</a>
+            <a href="#creators" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Құрушылар / Создатели</a>
+            <a href="#young-teachers" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Жас ұстаздар мектебі</a>
+            <a href="#checklist" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Онбординг Шек-лист</a>
+            <a href="#qualification" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Біліктілікті арттыру</a>
+            <a href="#base" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Жас маман базасы</a>
+            <a href="#events" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">Жоспар & Іс-шаралар</a>
+            <a href="#nqa" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-700 hover:text-sky-600">НҚА / Нормативтік база</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION 1: HERO & INTERACTIVE LOGO & SLOGAN & GALLERY CAROUSEL -->
+        <section id="hero" class="relative pt-8 pb-16 bg-gradient-to-b from-sky-50 via-white to-slate-50 border-b border-slate-200 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- School Photo Banner Header -->
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl group border-4 border-white">
+                    <img src="https://lh3.googleusercontent.com/d/1ICY__s3S-m-G5YVppzQ-HF10uQRSURnN" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/1200x500/0284c7/ffffff?text=Қадыр+Мырза+Әлі+Binom+School'" 
+                         alt="Қадыр Мырза Әлі Binom School" 
+                         class="w-full h-72 sm:h-96 md:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent flex flex-col justify-end p-6 sm:p-10">
+                        <span class="inline-block px-3 py-1 bg-sky-500/80 backdrop-blur-md text-white text-xs font-bold uppercase rounded-full w-max mb-2">
+                            BINOM SCHOOL
+                        </span>
+                        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">
+                            Қадыр Мырза Әлі атындағы Binom School мектеп-лицейі
+                        </h1>
+                        <p class="text-sky-100 text-sm sm:text-base mt-2 max-w-2xl font-light">
+                            Жас мамандарды бейімдеу және кәсіби дамыту орталығы
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Animated Logo Display Canvas Section -->
+                <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-slate-800 relative overflow-hidden">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="w-full lg:w-1/2 space-y-4">
+                            <div class="inline-flex items-center gap-2 text-sky-400 text-xs font-bold tracking-widest uppercase">
+                                <i class="fa-solid fa-bolt text-yellow-400"></i> Интерактивті логотип
+                            </div>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                                ALLQADAM <span class="text-sky-400">Interactive</span>
+                            </h2>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Анимация: адам кейіпкері жүріп бара жатқанда оның соңындағы әріптер уақытша сынып, ал алдында қайта қалпына келеді!
+                            </p>
+                            <div class="flex items-center gap-3 pt-2">
+                                <button onclick="triggerLogoAnim()" class="px-5 py-2.5 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl text-sm transition shadow-lg shadow-sky-500/30 flex items-center gap-2">
+                                    <i class="fa-solid fa-play"></i> Анимацияны іске қосу / Запустить
+                                </button>
+                                <span class="text-xs text-slate-400">Тышқанмен / тачпен басқарылады</span>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Container -->
+                        <div class="w-full lg:w-1/2 flex justify-center">
+                            <div class="relative w-full max-w-lg aspect-[16/9] rounded-2xl overflow-hidden border border-slate-700 shadow-inner">
+                                <canvas id="logoCanvas" class="w-full h-full cursor-pointer"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animated Motto / Motto Banner Section -->
+                <div class="text-center py-8 px-6 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100 rounded-3xl border border-sky-200/80 shadow-md relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-sky-300/30 rounded-full blur-2xl"></div>
+                    <div class="absolute -left-10 -top-10 w-40 h-40 bg-indigo-300/30 rounded-full blur-2xl"></div>
+                    
+                    <span class="text-xs font-bold tracking-widest text-sky-700 uppercase mb-2 block" id="mottoLabel">
+                        ҰРАН - ДЕВИЗ
+                    </span>
+                    <h2 id="mottoText" class="text-3xl sm:text-5xl font-black gradient-text tracking-tight animate-pulse-slow">
+                        Алғашқы қадамнан - сенімділікке
+                    </h2>
+                </div>
+
+                <!-- Photo Gallery Carousel -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900" id="galleryTitle">Фото галерея</h3>
+                            <p class="text-slate-500 text-sm" id="gallerySubtitle">Сообществомыздың белсенді сәттері мен іс-шаралары</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="scrollCarousel(-1)" class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button onclick="scrollCarousel(1)" class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Scroll Container -->
+                    <div id="galleryCarousel" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth py-2 px-1">
+                        <!-- Image 1 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/1gMh1fJuTXOlXvrV1dABdfTaxAKj1Xh9r" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+1'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 1">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Жас мамандар іс-шарасы
+                            </div>
+                        </div>
+                        <!-- Image 2 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/1FbF0xua_gJ7INQeV4JIXGeFICZKtSIi6" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+2'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 2">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Семинар-практикум
+                            </div>
+                        </div>
+                        <!-- Image 3 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/1Zht4KeBameEYIx6xuCClnkvsGGxC5ESb" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+3'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 3">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Тәжірибе алмасу
+                            </div>
+                        </div>
+                        <!-- Image 4 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/18_raVJS1YVcSrDhYSYJEJwMch-0zanv6" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+4'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 4">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Кәсіби даму
+                            </div>
+                        </div>
+                        <!-- Image 5 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/1f8rs5H8CWn9IYX-UCuRlAooBTvTAl6Wp" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+5'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 5">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Топтық жұмыс
+                            </div>
+                        </div>
+                        <!-- Image 6 -->
+                        <div class="min-w-[280px] sm:min-w-[360px] h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 relative group flex-shrink-0">
+                            <img src="https://lh3.googleusercontent.com/d/1Sge-8taTVYOnqdLGqTS5YRdA8q2godOn" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/0284c7/ffffff?text=Gallery+6'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Gallery photo 6">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 text-white font-medium text-sm">
+                                Жобаларды қорғау
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: ABOUT, MISSION, VALUES, DIRECTIONS & INSTAGRAM QR -->
+        <section id="about" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <!-- About Intro Block -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="px-3.5 py-1.5 bg-sky-100 text-sky-800 font-bold text-xs uppercase rounded-full inline-block">
+                            ALLQADAM
+                        </span>
+                        <h2 id="aboutMainHeading" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Алғашқы қадам. Жаңа мүмкіндіктер. Үлкен кәсіби болашақ.
+                        </h2>
+                        <p id="aboutDescription" class="text-lg text-slate-600 leading-relaxed">
+                            ALLQADAM — жас мамандарға арналған кәсіби қолдау және жаңа мүмкіндіктер кеңістігі. Біз жайында толық ақпаратты инстаграмнан да көре аласыздар:
+                        </p>
+
+                        <!-- Mission Box -->
+                        <div class="p-6 bg-sky-50 rounded-2xl border border-sky-200 space-y-2">
+                            <h3 id="missionHeading" class="text-xl font-bold text-sky-900 flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye text-sky-600"></i> Біздің миссиямыз
+                            </h3>
+                            <p id="missionText" class="text-slate-700 font-medium">
+                                Жас мамандар тәжірибе жинақтап, өз идеяларын жүзеге асыра алатын орта қалыптастыру.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Instagram & QR Card -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 rounded-3xl p-6 text-white shadow-xl flex flex-col items-center text-center space-y-4 border border-indigo-700">
+                        <div class="relative group">
+                            <img src="https://lh3.googleusercontent.com/d/1Sge-8taTVYOnqdLGqTS5YRdA8q2godOn" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/120x120/9333ea/ffffff?text=Instagram'" 
+                                 alt="Instagram Follow" 
+                                 class="w-20 h-20 rounded-full border-2 border-amber-400 object-cover shadow-lg mb-2">
+                        </div>
+                        <h4 class="text-xl font-bold">@allqadam_kma</h4>
+                        <p class="text-xs text-purple-200">Instagram парақшамызға жазылыңыз және жаңалықтардан хабардар болуңыз!</p>
+                        
+                        <!-- QR Code Image -->
+                        <div class="p-3 bg-white rounded-2xl shadow-md w-48 h-48 flex items-center justify-center">
+                            <img src="https://lh3.googleusercontent.com/d/1f8rs5H8CWn9IYX-UCuRlAooBTvTAl6Wp" 
+                                 onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.instagram.com/allqadam_kma'" 
+                                 alt="ALLQadam Instagram QR Code" 
+                                 class="w-full h-full object-contain rounded-lg">
+                        </div>
+
+                        <a href="https://www.instagram.com/allqadam_kma?igsi=MWZnNnVmaXV6OHNreQ%3D%3D&utm_source=qr" 
+                           target="_blank" 
+                           class="w-full py-3 bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white font-bold rounded-xl transition shadow-lg text-sm flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-instagram text-lg"></i> Instagram-ға өту
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4 Pillars Section -->
+                <div class="space-y-6">
+                    <h3 id="pillarsHeader" class="text-2xl font-bold text-slate-900">Мұнда сен:</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Card 1 -->
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:shadow-md transition space-y-3">
+                            <div class="text-3xl">📚</div>
+                            <h4 id="p1Title" class="text-lg font-bold text-slate-900">Тәжірибе</h4>
+                            <p id="p1Text" class="text-sm text-slate-600">Пайдалы материалдар және әдістемелік құралдар аласыз.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:shadow-md transition space-y-3">
+                            <div class="text-3xl">🤝</div>
+                            <h4 id="p2Title" class="text-lg font-bold text-slate-900">Қауымдастық</h4>
+                            <p id="p2Text" class="text-sm text-slate-600">Пікірлес жандармен танысып, тәлімгерлерден қолдау аласыз.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:shadow-md transition space-y-3">
+                            <div class="text-3xl">🚀</div>
+                            <h4 id="p3Title" class="text-lg font-bold text-slate-900">Мүмкіндіктер</h4>
+                            <p id="p3Text" class="text-sm text-slate-600">Жобаларға, байқауларға және түрлі іс-шараларға қатысасыз.</p>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:shadow-md transition space-y-3">
+                            <div class="text-3xl">💡</div>
+                            <h4 id="p4Title" class="text-lg font-bold text-slate-900">Идеялар</h4>
+                            <p id="p4Text" class="text-sm text-slate-600">Өз бастамаңды ұсынып, оны нақты жобаға айналдырасыз.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values & Key Directions -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Values Block -->
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-8 shadow-xl space-y-6">
+                        <h3 id="valuesTitle" class="text-2xl font-bold flex items-center gap-3">
+                            <i class="fa-solid fa-star text-amber-400"></i> Басшылыққа алатын құндылықтар
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 border-b border-slate-700/60 pb-3">
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+                                <div>
+                                    <h5 class="font-bold text-sky-300">Кәсіби шеберлік және жауапкершілік</h5>
+                                    <p class="text-xs text-slate-300">Үздіксіз ізденіс</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 border-b border-slate-700/60 pb-3">
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+                                <div>
+                                    <h5 class="font-bold text-sky-300">Қажырлы еңбек</h5>
+                                    <p class="text-xs text-slate-300">Ізденіс. Нәтижеге ұмтылу. Мақсатқа жету.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 border-b border-slate-700/60 pb-3">
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+                                <div>
+                                    <h5 class="font-bold text-sky-300">Кайдзен</h5>
+                                    <p class="text-xs text-slate-300">Өмір салты - тұрақты даму</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 border-b border-slate-700/60 pb-3">
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">4</span>
+                                <div>
+                                    <h5 class="font-bold text-sky-300">ҰСТАЗ БАҚЫТЫ - СЕНІМДІ ОРТА</h5>
+                                    <p class="text-xs text-slate-300">Өзара сенім, құрмет және қолдау</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">5</span>
+                                <div>
+                                    <h5 class="font-bold text-sky-300">Үздік команда</h5>
+                                    <p class="text-xs text-slate-300">Бір мақсат - ортақ құндылық</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Directions Block -->
+                    <div class="bg-sky-50 rounded-3xl p-8 border border-sky-200 shadow-md space-y-6">
+                        <h3 id="directionsTitle" class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                            <i class="fa-solid fa-compass text-sky-600"></i> Негізгі бағыттар
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-white rounded-2xl border border-sky-100 shadow-sm space-y-1">
+                                <h4 id="dir1Title" class="font-bold text-sky-900 text-base">Кәсіби даму</h4>
+                                <p id="dir1Text" class="text-sm text-slate-600">Курстар, шеберлік сабақтары, тренингтер, вебинарлар және практикалық ресурстар.</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-2xl border border-sky-100 shadow-sm space-y-1">
+                                <h4 id="dir2Title" class="font-bold text-sky-900 text-base">Тәлімгерлік</h4>
+                                <p id="dir2Text" class="text-sm text-slate-600">Тәжірибелі әріптестер мен кәсіби тәлімгерлерден қолдау алу мүмкіндіктері.</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-2xl border border-sky-100 shadow-sm space-y-1">
+                                <h4 id="dir3Title" class="font-bold text-sky-900 text-base">Жобалық жұмыс</h4>
+                                <p id="dir3Text" class="text-sm text-slate-600">Жеке білім беру және әлеуметтік жобаларды әзірлеу әрі жүзеге асыру.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: ADMINISTRATION (МЕКТЕП ӘКІМШІЛІГІ) -->
+        <section id="admin" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-sky-100 text-sky-800 font-bold text-xs uppercase rounded-full inline-block">
+                        BINOM SCHOOL
+                    </span>
+                    <h2 id="adminHeaderTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Әкімшілік
+                    </h2>
+                    <p class="text-slate-500 text-sm">Мектеп басшылығы мен әкімшілік ұжымы</p>
+                </div>
+
+                <!-- Prominent Director Card -->
+                <div class="max-w-md mx-auto bg-white rounded-3xl p-6 shadow-xl border border-sky-200/80 text-center space-y-4 hover:-translate-y-1 transition duration-300">
+                    <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-sky-500 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1WywP9_T9o82jUniP_59HB7uOo_upIdd-" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/0284c7/ffffff?text=Director'" 
+                             alt="Омаров Сәтжан Кәрібайұлы" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 font-bold text-xs rounded-full inline-block mb-2">
+                            <i class="fa-solid fa-crown text-amber-600 mr-1"></i> <span id="dirBadge">Мектеп директоры</span>
+                        </span>
+                        <h3 class="text-2xl font-black text-slate-900" id="dirName">Омаров Сәтжан Кәрібайұлы</h3>
+                        <p class="text-sky-700 font-semibold text-sm mt-1" id="dirTitle">
+                            Қадыр Мырза Әлі атындағы Binom school мектеп-лицейінің директоры
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rest of Administration Carousel Slider -->
+                <div class="space-y-4 pt-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-slate-900" id="adminTeamTitle">Басшылық құрам</h3>
+                        <div class="flex gap-2">
+                            <button onclick="scrollAdminCarousel(-1)" class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button onclick="scrollAdminCarousel(1)" class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Scroll Track -->
+                    <div id="adminCarousel" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
+                        
+                        <!-- Admin Card 1 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1S8MHRTiHFHXTEcf3sIIMBqwrQHf62VZ5" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Ибраева Айгүл">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Ибраева Айгүл Аронқызы" data-ru="Ибраева Айгуль Аронкызы">Ибраева Айгүл Аронқызы</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың ғылыми жөніндегі орынбасары" data-ru="Заместитель директора по научной части">Директордың ғылыми жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 2 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1khtouPbFUMDoe_Yh1ADQlJEJ4AxR7ULS" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Тойымбаева Жанар">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Тойымбаева Жанар Амантаевна" data-ru="Тойымбаева Жанар Амантаевна">Тойымбаева Жанар Амантаевна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың оқу ісі жөніндегі орынбасары" data-ru="Заместитель директора по учебной части">Директордың оқу ісі жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 3 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1_Vcc0sa06BVmndor1NLgsmRRrCPzFSbG" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Серікбай Ерік">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Серікбай Ерік Ниязбекұлы" data-ru="Серикбай Ерик Ниязбекулы">Серікбай Ерік Ниязбекұлы</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың оқу ісі жөніндегі орынбасары" data-ru="Заместитель директора по учебной части">Директордың оқу ісі жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 4 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1KhfmHXipq1qbNJWIKIat4mS7F_m3bIDD" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Шарипова Гульмира">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Шарипова Гульмира Какешовна" data-ru="Шарипова Гульмира Какешовна">Шарипова Гульмира Какешовна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың оқу ісі жөніндегі орынбасары" data-ru="Заместитель директора по учебной части">Директордың оқу ісі жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 5 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1muomPvKwRmBLlursgsNXqVVIeg3B0ZRT" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Сеилханов Дархан">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Сеилханов Дархан Серікович" data-ru="Сеилханов Дархан Серикович">Сеилханов Дархан Серікович</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың тәрбие ісі жөніндегі орынбасары" data-ru="Заместитель директора по воспитательной части">Директордың тәрбие ісі жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 6 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1xwtSGLnAKJfc1eJ5cLo6fQyYa5bZz9Ug" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Шақмұрат Айдана">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Шақмұрат Айдана Бауыржанқызы" data-ru="Шакмурат Айдана Бауыржанкызы">Шақмұрат Айдана Бауыржанқызы</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Директордың тәрбие ісі жөніндегі орынбасары" data-ru="Заместитель директора по воспитательной части">Директордың тәрбие ісі жөніндегі орынбасары</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 7 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1qzoMcK56HlisDo-O9yModVRWjKrLeioh" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Өмірхан Әділет">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Өмірхан Әділет Манерханұлы" data-ru="Омирхан Адилет Манерханулы">Өмірхан Әділет Манерханұлы</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Құқық бұзушылықтың алдын алу менеджері" data-ru="Менеджер по профилактике правонарушений">Құқық бұзушылықтың алдын алу менеджері</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 8 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1JB4IYlHWl-XoKA1sNvWj8FtQtDK7ZEAq" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Бекбосынқызы Ақерке">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Бекбосынқызы Ақерке" data-ru="Бекбосынкызы Акерке">Бекбосынқызы Ақерке</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Әдіскер" data-ru="Методист">Әдіскер</p>
+                            </div>
+                        </div>
+
+                        <!-- Admin Card 9 -->
+                        <div class="min-w-[260px] sm:min-w-[300px] bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition duration-300 flex-shrink-0 flex flex-col items-center text-center space-y-3">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1SztcCmLxOYNR-w0hFCcyFTtYUHf2-5wD" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Admin'" 
+                                     class="w-full h-full object-cover" alt="Тюлюгенева Диана">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg admin-name" data-kz="Тюлюгенева Диана Сергеевна" data-ru="Тюлюгенева Диана Сергеевна">Тюлюгенева Диана Сергеевна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 admin-pos" data-kz="Әдіскер / Әлеуметтік педагог" data-ru="Методист / Социальный педагог">Әдіскер / Әлеуметтік педагог</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: CREATORS (СОЗДАТЕЛИ СООБЩЕСТВА ALL QADAM) -->
+        <section id="creators" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="px-3.5 py-1.5 bg-purple-100 text-purple-800 font-bold text-xs uppercase rounded-full inline-block">
+                        ALL QADAM TEAM
+                    </span>
+                    <h2 id="creatorsTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        ALL Qadam қауымдастығын құрушылар
+                    </h2>
+                    <p id="creatorsSubtitle" class="text-slate-600 text-base leading-relaxed">
+                        Біз — мектепте жай ғана жұмыс істеуді емес, жаңа дүниелер жасап, дамып, бірге алға ұмтылуды мақсат еткен екі жас ұстазбыз.
+                    </p>
+                </div>
+
+                <!-- Two Creators Grid Side-by-Side on Desktop -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Creator 1 -->
+                    <div class="bg-gradient-to-b from-slate-50 to-sky-50/40 rounded-3xl p-8 border border-slate-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-32 h-32 rounded-2xl overflow-hidden border-2 border-sky-500 shadow-md mx-auto sm:mx-0">
+                                <img src="https://lh3.googleusercontent.com/d/1qU2ojDqAfvndSdmAFv4ATbJYjmFm7YEP" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=Nazym'" 
+                                     alt="Болатқанова Назым Серікқызы" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900">Болатқанова Назым Серікқызы</h3>
+                                <p id="c1Subject" class="text-sky-700 font-semibold text-sm mt-1">Орыс тілі мен әдебиеті пәнінің мұғалімі</p>
+                            </div>
+                            <blockquote id="c1Quote" class="text-slate-600 text-sm leading-relaxed italic border-l-4 border-sky-400 pl-4 py-1">
+                                "Қарапайым сабақты қарым-қатынасқа, шығармашылыққа және жаңа идеяларға толы ортаға айналдырғанды ұнатамын. Меніңше, жақсы мұғалім — барлық сұрақтың жауабын білетін адам емес, өзі де үнемі ізденіп, үйреніп, жаңаны байқап көруден қорықпайтын адам."
+                            </blockquote>
+                        </div>
+                        <div class="pt-4 border-t border-slate-200/80 flex items-center gap-2 text-xs font-bold text-sky-800">
+                            <i class="fa-solid fa-sparkles text-amber-500"></i> Со-основатель ALLQadam
+                        </div>
+                    </div>
+
+                    <!-- Creator 2 -->
+                    <div class="bg-gradient-to-b from-slate-50 to-indigo-50/40 rounded-3xl p-8 border border-slate-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-32 h-32 rounded-2xl overflow-hidden border-2 border-indigo-500 shadow-md mx-auto sm:mx-0">
+                                <img src="https://lh3.googleusercontent.com/d/1fZzxhhA8qU_SycIm_G5uE5dgF0G5mG9g" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/4f46e5/ffffff?text=Diana'" 
+                                     alt="Сафина Диана Мәуленқызы" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900">Сафина Диана Мәуленқызы</h3>
+                                <p id="c2Subject" class="text-indigo-700 font-semibold text-sm mt-1">Информатика пәнінің мұғалімі</p>
+                            </div>
+                            <blockquote id="c2Quote" class="text-slate-600 text-sm leading-relaxed italic border-l-4 border-indigo-400 pl-4 py-1">
+                                "Заманауи мұғалім — оқушыларымен бірге үнемі дамып отыратын тұлға деп сенемін. Заманауи технологиялар мен цифрлық құралдарға қызығамын және оқуды қызықты, түсінікті әрі пайдалы етудің жаңа жолдарын іздеймін."
+                            </blockquote>
+                        </div>
+                        <div class="pt-4 border-t border-slate-200/80 flex items-center gap-2 text-xs font-bold text-indigo-800">
+                            <i class="fa-solid fa-code text-indigo-500"></i> Со-основатель ALLQadam
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: SCHOOL OF "YOUNG TEACHERS" & METHODOLOGICAL ASSOCIATIONS -->
+        <section id="young-teachers" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <!-- School Info & WhatsApp Banner -->
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-3xl p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-3 text-center md:text-left">
+                        <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-xs font-bold uppercase rounded-full">
+                            SCHOOL OF "YOUNG TEACHERS"
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                            Жас мамандар мектебі & КМА басшылары
+                        </h2>
+                        <div class="flex flex-wrap gap-4 pt-1 justify-center md:justify-start">
+                            <span class="px-4 py-2 bg-emerald-800/60 rounded-xl text-sm font-semibold border border-emerald-400/30">
+                                👨‍🏫 Жас мамандар саны: <strong class="text-yellow-300">17</strong>
+                            </span>
+                            <span class="px-4 py-2 bg-emerald-800/60 rounded-xl text-sm font-semibold border border-emerald-400/30">
+                                ⏳ 0-12 ай жас мамандар саны: <strong class="text-yellow-300">8</strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Button Link -->
+                    <a href="https://chat.whatsapp.com/CtinnmRHQ1eHTuy3nUhzlh?s=cl&p=i&mlu=4" 
+                       target="_blank" 
+                       class="px-6 py-4 bg-white text-emerald-800 font-extrabold rounded-2xl shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-1 flex items-center gap-3 text-sm flex-shrink-0">
+                        <i class="fa-brands fa-whatsapp text-2xl text-emerald-500"></i>
+                        <span>КМА WhatsApp чатына қосылу</span>
+                    </a>
+                </div>
+
+                <!-- Young Teachers Main Events List -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6">
+                    <h3 id="eventsHeader" class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <i class="fa-solid fa-calendar-check text-sky-600"></i> Негізгі іс-шаралар
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">1.</span>
+                            <p>Ұстаздар күнінде “Жас мамандар” шеруі болды.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">2.</span>
+                            <p>Жас мамандардың кәсіби дамуына бағытталған «Stand-up» форматындағы кездесу алаңы.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">3.</span>
+                            <p>«YOUNG TEACHERS’ PLATFORM: ИДЕЯ, ІЗДЕНІС, ИННОВАЦИЯ» атты қалалық семинар.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">4.</span>
+                            <p>«PBL&AI: оқу сауаттылығының жаңа траекториясы» Республикалық ғылыми-әдістемелік конференциясы.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">5.</span>
+                            <p>Математика пәні қалалық “ОЙ ДАМЫТУ” олимпиадасы.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">6.</span>
+                            <p>“ПедОлимп” Республикалық олимпиадасы.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">7.</span>
+                            <p>“Бастауыш сынып оқушыларының функционалдық сауаттылығын дамыту” қалалық семинары.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">8.</span>
+                            <p>“Цифрлық трансформация дәуіріндегі мұғалімнің жаңа рөлі” Халықаралық ғылыми-тәжірибелік конференция.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">9.</span>
+                            <p>Пәндік олимпиада, ғылыми жоба, “Алтын сақа”, “Нұрорда” қалалық олимпиадаларына оқушы дайындау.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm flex items-start gap-3">
+                            <span class="text-sky-600 font-bold">10.</span>
+                            <p>“Функционалдық сауаттылықты дамытудағы жасанды интеллектің мүмкіндіктері” семинар-практикум.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodological Association Heads Section (3 on desktop, 2 on tablet, 1 on mobile) -->
+                <div class="space-y-8">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <h3 id="moHeadsTitle" class="text-3xl font-extrabold text-slate-900">
+                            Әдістемелік бірлестіктер жетекшілері
+                        </h3>
+                        <p class="text-slate-500 text-sm">Руководители методических объединений (МО)</p>
+                    </div>
+
+                    <!-- Grid: 3 cols desktop, 2 tablet, 1 mobile -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- MO Card 1: English -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1p9tTFQZ6TI9p1ReDW09kaWAEhthaKqbD" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+1'" 
+                                     class="w-full h-full object-cover" alt="Смагулова Кымбат">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Смагулова Кымбат Сарсенбаевна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Ағылшын тілі ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО английского языка">Ағылшын тілі ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 2: History -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1ZnKI01KoR26LyGHBa0TP0Z4AXyek9bzK" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+2'" 
+                                     class="w-full h-full object-cover" alt="Ахметкалиева Алуа">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Ахметкалиева Алуа Кенесбековна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Тарих / Қоғамдық пәндер ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО истории и общественных дисциплин">Тарих / Қоғамдық пәндер ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 3: Math -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1FlHTIhb-xb-EOQ9YoEzKrDsc03LaHkmN" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+3'" 
+                                     class="w-full h-full object-cover" alt="Жолдыбалина Назгуль">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Жолдыбалина Назгуль Тилеубековна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Математика ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО математики">Математика ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 4: Russian -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1ZPOkSyrQB9ToXkfoGhzViBpfwPhcNyGT" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+4'" 
+                                     class="w-full h-full object-cover" alt="Байгабилова Айжан">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Байгабилова Айжан Зиябековна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Орыс тілі мен әдебиеті ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО русского языка">Орыс тілі мен әдебиеті ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 5: Natural Sciences -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1sWvM63qwBHllKzTZTxWXzaPF0OKkD9ra" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+5'" 
+                                     class="w-full h-full object-cover" alt="Серикбаева Шолпан">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Серикбаева Шолпан Абдикапаровна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Жаратылыстану ғылымдары ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО естественных наук">Жаратылыстану ғылымдары ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 6: Physics & CS -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1eLZ-AXa_A7ybGbI4OOqAHU_y8jSw0kkV" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+6'" 
+                                     class="w-full h-full object-cover" alt="Тамабекова Саулет">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Тамабекова Саулет Махатовна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Информатика және физика ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО информатики и физики">Информатика және физика ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 7: Kazakh Language -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1V967YmrOX3BEDqN-sd2amBmzVHyW5A-j" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+7'" 
+                                     class="w-full h-full object-cover" alt="Раева Асемгуль">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Раева Асемгуль Жеткергеновна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Қазақ тілі мен әдебиеті ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО казахского языка">Қазақ тілі мен әдебиеті ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 8: Primary RU -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/175gCwXGXV_ooMe5Va1bZtAkPfF6OIOrZ" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+8'" 
+                                     class="w-full h-full object-cover" alt="Дюсенова Нуржамал">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Дюсенова Нуржамал Балташовна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Орыс сыныптары бастауыш ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО начальных классов (РУ)">Орыс сыныптары бастауыш ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 9: Primary KZ -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/10_H9Ag-N5ID7DVDQ8NLxf6d2HzfeXOlT" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+9'" 
+                                     class="w-full h-full object-cover" alt="Абилова Айша">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Абилова Айша</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Қазақ сыныптары бастауыш ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО начальных классов (КЗ)">Қазақ сыныптары бастауыш ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 10: Aesthetics -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1-Pp4SlTWt6crWI5n_s4L2Y6kTBdhxfID" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+10'" 
+                                     class="w-full h-full object-cover" alt="Сабиева Жанат">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Сабиева Жанат Касеневна</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Көркем-эстетикалық ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО эстетики">Көркем-эстетикалық ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                        <!-- MO Card 11: PE -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col items-center text-center space-y-4">
+                            <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-sky-400 shadow">
+                                <img src="https://lh3.googleusercontent.com/d/1zlAy9eXzKcBjKai-xu7eYuk-Dwts33Wt" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0284c7/ffffff?text=MO+11'" 
+                                     class="w-full h-full object-cover" alt="Тойымбаев Ержан">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Тойымбаев Ержан Кабдылмаликович</h4>
+                                <p class="text-xs font-semibold text-sky-600 mt-1 mo-title" 
+                                   data-kz="Дене шынықтыру ӘБ жетекшісі" 
+                                   data-ru="Руководитель МО физической культуры">Дене шынықтыру ӘБ жетекшісі</p>
+                                <span class="inline-block mt-2 px-2.5 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md">Педагог-зерттеуші</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Fortnight Schedule & Creative Groups -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Fortnight Schedule Table -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                        <h4 id="fortnightTitle" class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days text-sky-600"></i> ӘБ Онкүндіктерінің өту күндері (2026-2027)
+                        </h4>
+                        <div class="divide-y divide-slate-100 text-xs sm:text-sm">
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Дене шынықтыру ӘБ:</span><span class="text-sky-700 font-bold">21.09. - 02.10.2026 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Математика ӘБ:</span><span class="text-sky-700 font-bold">05.10. - 16.10.2026 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Бастауыш сыныптар ӘБ:</span><span class="text-sky-700 font-bold">09.11. - 20.11.2026 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Қоғамдық пәндер ӘБ:</span><span class="text-sky-700 font-bold">30.11. - 11.12.2026 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Қазақ тілі мен әдебиеті ӘБ:</span><span class="text-sky-700 font-bold">11.01. - 22.01.2027 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Орыс тілі мен әдебиеті ӘБ:</span><span class="text-sky-700 font-bold">25.01. - 05.02.2027 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Физика және информатика ӘБ:</span><span class="text-sky-700 font-bold">08.02. - 19.02.2027 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Шет тілдері ӘБ:</span><span class="text-sky-700 font-bold">22.02. - 05.03.2027 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Жаратылыстану ғылымдары ӘБ:</span><span class="text-sky-700 font-bold">29.03. - 09.04.2027 ж.</span></div>
+                            <div class="py-2.5 flex justify-between gap-2"><span class="font-semibold text-slate-800">Көркем-эстетикалық ӘБ:</span><span class="text-sky-700 font-bold">12.04. - 23.04.2027 ж.</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Creative Groups -->
+                    <div class="bg-gradient-to-br from-sky-900 to-slate-900 p-6 rounded-3xl text-white shadow-xl space-y-4">
+                        <div class="space-y-1">
+                            <span class="text-xs text-sky-300 uppercase font-bold tracking-wider">2025-2028 Мектептің даму бағдарламасы</span>
+                            <h4 id="creativeGroupsTitle" class="text-xl font-bold">Creative Groups (Шығармашылық топтар)</h4>
+                        </div>
+                        <ul class="space-y-3 text-xs sm:text-sm">
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>STEAM World “Әлем ғылым мен өнерде”</strong> — Жетекші: Саханова А.Р.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>“Upgrade Team” тобы</strong> — Жетекші: Спанова А.С.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>PBL тобы</strong> — Жетекші: Бимбетова З.А.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>“PISA & Оқу сауаттылығы” PLC тобы</strong> — Жетекші: Садуакасова Г.Р.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>“Орыс тілі мен әдебиеті мұғалімдерінің КӨҚ”</strong> — Жетекші: Карпыкбаева А.С.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>PLC тобы</strong> — Жетекші: Абдрахманова Э.А.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>“AI Leaders” тобы</strong> — Жетекші: Тамабекова С.М.
+                            </li>
+                            <li class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10">
+                                <strong>“BOOK TALKS” тобы</strong> — Жетекші: Абдрахманова Э.А., Кубигенова Р.Н.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: ONBOARDING CHECKLIST (ЖАС МАМАНҒА АРНАЛҒАН ҚАДАМДАР) -->
+        <section id="checklist" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-emerald-100 text-emerald-800 font-bold text-xs uppercase rounded-full inline-block">
+                        CHECKLIST
+                    </span>
+                    <h2 id="checklistHeader" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Жас маманның алғашқы қадамдары
+                    </h2>
+                    <p id="checklistSub" class="text-slate-500 text-sm">Жұмысқа орналасу және бейімделу бойынша интерактивті бақылау тізімі</p>
+                </div>
+
+                <!-- Interactive Table / Checklist Cards -->
+                <div class="space-y-4">
+                    
+                    <!-- Step 1 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4 space-y-1">
+                            <input type="checkbox" id="chk1" onchange="saveCheckState(1)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">1-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Представить документы в отдел кадров и подписать трудовой договор</h4>
+                                <p class="text-xs text-slate-500 mt-1">Отдел кадров / Кабинет 125 | Документы: 075, мед-карта, резюме, достижения, сертификаты курсов</p>
+                                
+                                <!-- Document Accordion Toggle -->
+                                <details class="mt-3 text-xs text-slate-600 bg-white p-3 rounded-xl border border-slate-200">
+                                    <summary class="font-bold text-sky-600 cursor-pointer hover:underline">📋 Жұмысқа орналасу үшін ұсынылатын құжаттардың тізбесін көру</summary>
+                                    <ol class="list-decimal list-inside space-y-1 mt-2 pl-2 text-slate-700">
+                                        <li>Кадрларды есепке алу жөніндегі жеке парақ.</li>
+                                        <li>Жеке куәліктің көшірмесі – 2 дана.</li>
+                                        <li>Дипломның және оған қосымшаның көшірмесі (бакалавриат, магистратура).</li>
+                                        <li>Соттылығының болуы немесе болмауы туралы анықтама.</li>
+                                        <li>Наркологиялық диспансерден анықтама.</li>
+                                        <li>Психоневрологиялық диспансерден анықтама.</li>
+                                        <li>Өмірбаян.</li>
+                                        <li>Біліктілік санаты куәлігі бұйрығы көшірмесі немесе ҰКТ сертификаты.</li>
+                                        <li>Соңғы 3 жылдағы біліктілікті арттыру курсы сертификаттары.</li>
+                                        <li>3×4 көлеміндегі фотосурет – 1 дана.</li>
+                                        <li>Әскери билет (әскери міндеттілер үшін).</li>
+                                        <li>Банк есепшот деректемелері (IBAN).</li>
+                                        <li>Еңбек кітапшасы.</li>
+                                        <li>Медициналық кітапша.</li>
+                                        <li>Қоса атқарушылар үшін — негізгі жұмыс орнынан анықтама.</li>
+                                    </ol>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" id="chk2" onchange="saveCheckState(2)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">2-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Ознакомиться с приказом о приеме на работу и распределением учебной нагрузки</h4>
+                                <p class="text-xs text-slate-500 mt-1">Администрация / Зам. директора по УР | Кабинет 117</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" id="chk3" onchange="saveCheckState(3)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">3-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Узнать порядок получения канцелярии и хозяйственных материалов</h4>
+                                <p class="text-xs text-slate-500 mt-1">Завхоз / Зав. кабинетом</p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/77755379074" target="_blank" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-xs font-bold hover:bg-emerald-600 transition flex items-center gap-2 self-start">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp арқылы хабарласу
+                        </a>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" id="chk4" onchange="saveCheckState(4)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">4-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Получить доступ к Kundelik.kz, рабочей почте и школьной сети Wi-Fi</h4>
+                                <p class="text-xs text-slate-500 mt-1">IT-специалист / Зам. по ИТ | Кабинет 315/1</p>
+                            </div>
+                        </div>
+                        <a href="https://forms.office.com/pages/responsepage.aspx?id=b3KmMNA8wUCeYgP6sOhQ3oUuMfaTp9NCsTf0eb6OSZ5URUo3MkRLNFZTWVNLWTVIUFJMMVZBM1lGMy4u&route=shorturl" target="_blank" class="px-4 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold hover:bg-sky-700 transition flex items-center gap-2 self-start">
+                            <i class="fa-solid fa-file-pen"></i> IT өтінім формасын толтыру
+                        </a>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" id="chk5" onchange="saveCheckState(5)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">5-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Активация скуд-карт и кабинет камер</h4>
+                                <p class="text-xs text-slate-500 mt-1">Маршрут: Кабинет 117 ➡️ Кабинет 130</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" id="chk6" onchange="saveCheckState(6)" class="w-6 h-6 mt-1 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-700">6-ҚАДАМ</span>
+                                <h4 class="text-lg font-bold text-slate-900">Получить расписание уроков, список закрепленных классов и вступить в чаты</h4>
+                                <p class="text-xs text-slate-500 mt-1">Сабақ кестесі және ресми педагогикалық чаттар</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 self-start">
+                            <a href="https://kadyrmyrzaali.edupage.org/timetable/" target="_blank" class="px-3 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition flex items-center gap-1">
+                                <i class="fa-solid fa-clock"></i> Edupage Кесте
+                            </a>
+                            <a href="https://whatsapp.com/channel/0029Vb85PgyLCoWw4IV2ZD1Z" target="_blank" class="px-3 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition flex items-center gap-1">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp Канал
+                            </a>
+                            <a href="https://www.instagram.com/binom.myrzaali?igsi=enM1eHV1N216bzVu" target="_blank" class="px-3 py-2 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition flex items-center gap-1">
+                                <i class="fa-brands fa-instagram"></i> Instagram
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 7: QUALIFICATION IMPROVEMENT (ПЕДАГОГТЕРДІҢ КӘСІБИ БІЛІКТІЛІГІН ЖЕТІЛДІРУ) -->
+        <section id="qualification" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-sky-100 text-sky-800 font-bold text-xs uppercase rounded-full inline-block">
+                        QUALIFICATION
+                    </span>
+                    <h2 id="qualTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Педагогтердің кәсіби біліктілігін жетілдіру
+                    </h2>
+                    <p class="text-slate-500 text-sm" id="qualSub">Біліктілікті арттыру курстары мен семинарлар тізімі (пайыздарсыз)</p>
+                </div>
+
+                <!-- Interactive Search & Add Course Bar -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="relative w-full sm:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="courseSearch" oninput="filterCourses()" placeholder="Курстарды іздеу..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                    <button onclick="openAddCourseModal()" class="w-full sm:w-auto px-4 py-2 bg-sky-600 text-white font-bold rounded-xl text-xs hover:bg-sky-700 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Жаңа курс қосу / Добавить курс
+                    </button>
+                </div>
+
+                <!-- Dynamic Course Grid (No percentages displayed) -->
+                <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Course cards will render dynamically or static fallback below -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 8: KNOWLEDGE BASE & TEMPLATES (ЖАС МАМАНҒА АРНАЛҒАН БАЗА) -->
+        <section id="base" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-indigo-100 text-indigo-800 font-bold text-xs uppercase rounded-full inline-block">
+                        DOCUMENTS & TEMPLATES
+                    </span>
+                    <h2 id="baseTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Жас маманға арналған база
+                    </h2>
+                    <p id="baseSub" class="text-slate-500 text-sm">Күнделікті жұмыста қолдануға болатын практикалық құжаттар мен шаблондар жинағы</p>
+                </div>
+
+                <!-- Grid of Google Docs Template Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Template 1: KSP / QMJ -->
+                    <a href="https://docs.google.com/document/d/1FGe1Uo-7mqazfxBzMaZ4Q6hJBH_veajj/edit?usp=sharing&ouid=105381335665535352875&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-file-word"></i>
+                            </div>
+                            <h4 id="doc1Title" class="font-bold text-slate-900 text-lg">ҚМЖ / ҚСҚ шаблоны</h4>
+                            <p class="text-xs text-slate-500">Күнделікті сабақ жоспарының дайын үлгісі (КСП / ҚМЖ)</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 2: Educational Work Plan -->
+                    <a href="https://docs.google.com/document/d/1m7WcwHK4dbFHdcq-yAhlnNh0zRWBMcDY/edit?usp=sharing&ouid=115764279893190134493&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-file-pen"></i>
+                            </div>
+                            <h4 id="doc2Title" class="font-bold text-slate-900 text-lg">Тәрбие жұмысының жоспарлары</h4>
+                            <p class="text-xs text-slate-500">Сынып жетекшінің тәрбие жұмыс жоспарының үлгілері</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 3: Applications / Reports -->
+                    <a href="https://docs.google.com/document/d/1niEmUcSz7Tx1TPuaggfMMioxJ-C6wrIw/edit?usp=sharing&ouid=105381335665535352875&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-file-invoice"></i>
+                            </div>
+                            <h4 id="doc3Title" class="font-bold text-slate-900 text-lg">Есептер / Заявления</h4>
+                            <p class="text-xs text-slate-500">Өтініштер мен есептілік формаларының бланкілері</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 4: Character Reference -->
+                    <a href="https://docs.google.com/document/d/1_DwAzhbZMFCHeBDv_KsV3KpVWHCUxArN/edit?usp=sharing&ouid=105381335665535352875&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-user-check"></i>
+                            </div>
+                            <h4 id="doc4Title" class="font-bold text-slate-900 text-lg">Мінездеме / Характеристика</h4>
+                            <p class="text-xs text-slate-500">Оқушыға мінездеме жазудың үлгілік шаблоны</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 5: Parent Meeting Protocol -->
+                    <a href="https://docs.google.com/document/d/1dbHpseUehkk_25d_k1QgyMZ15GgQUrkE/edit?usp=sharing&ouid=105381335665535352875&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-users text-rose-600"></i>
+                            </div>
+                            <h4 id="doc5Title" class="font-bold text-slate-900 text-lg">Ата-ана жиналысының протоколы</h4>
+                            <p class="text-xs text-slate-500">Хаттама толтыру үлгісі</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 6: Class Roster for Medical/File -->
+                    <a href="https://docs.google.com/document/d/1bW6ieCGPRZ1I4bjAGS-iFrCtghQvCAsb/edit?usp=sharing&ouid=115764279893190134493&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-notes-medical"></i>
+                            </div>
+                            <h4 id="doc6Title" class="font-bold text-slate-900 text-lg">Жеке іс & Мед блок тізімі</h4>
+                            <p class="text-xs text-slate-500">Сынып оқушыларының тізімі (жеке іс пен медпункт үшін)</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 7: Textbook List -->
+                    <a href="https://docs.google.com/document/d/1srStMs3et2dYj2SCK2APD4KuRi6x7Rax/edit?usp=sharing&ouid=115764279893190134493&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <h4 id="doc7Title" class="font-bold text-slate-900 text-lg">Оқулықтарға арналған тізім</h4>
+                            <p class="text-xs text-slate-500">Кітапханаға берілетін оқулықтар есебінің ведомосы</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 8: Safety Guidelines -->
+                    <a href="https://docs.google.com/document/d/1gFfVBIqz4W68zuOiDjwpmFkpv8FliBZh/edit?usp=sharing&ouid=115764279893190134493&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h4 id="doc8Title" class="font-bold text-slate-900 text-lg">Қауіпсіздік техникасы</h4>
+                            <p class="text-xs text-slate-500">Нұсқаулықтар мен техника қауіпсіздігі журналы</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Template 9: Class Advisor Job Instructions -->
+                    <a href="https://docs.google.com/document/d/14frl-dwq9VmA5Nep4DevbuDaTX3O0yka/edit?usp=sharing&ouid=115764279893190134493&rtpof=true&sd=true" 
+                       target="_blank" 
+                       class="p-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg transition group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                            </div>
+                            <h4 id="doc9Title" class="font-bold text-slate-900 text-lg">Сынып жетекшінің лауазымдық нұсқаулығы</h4>
+                            <p class="text-xs text-slate-500">Міндеттер мен құқықтар ережесі</p>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Құжатты ашу <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 9: SCHOOL EVENTS & BINOM JAS TEACHERS NETWORK -->
+        <section id="events" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-amber-100 text-amber-800 font-bold text-xs uppercase rounded-full inline-block">
+                        EVENTS & NETWORK
+                    </span>
+                    <h2 id="eventsMainTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Іс-шаралар тізімі & BINOM JAS TEACHERS
+                    </h2>
+                    <p class="text-slate-500 text-sm">Мектепшілік және желілік іс-шаралар кестесі</p>
+                </div>
+
+                <!-- Annual School Events List -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                    <h3 id="schoolEventsHeading" class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-star text-amber-500"></i> Мектептің негізгі іс-шаралары мен конкурстары
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm font-semibold">
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-sky-600 text-lg"></i> Педагогикалық кеңес
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-ribbon text-sky-600 text-lg"></i> Жас мамандарды салтанатты қабылдау
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-sky-600 text-lg"></i> Zerdeli
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-apple-whole text-sky-600 text-lg"></i> Ұстаздар күні
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-trophy text-sky-600 text-lg"></i> Олимпиадалар (Барлық деңгей)
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-sky-600 text-lg"></i> Конференциялар
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-cake-candles text-sky-600 text-lg"></i> Мектептің 5 жұмыстық мерейтойы
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-900 rounded-2xl border border-sky-100 flex items-center gap-2">
+                            <i class="fa-solid fa-microphone text-sky-600 text-lg"></i> StandUp (көктем)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BINOM JAS TEACHERS Schedule Table -->
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden space-y-4">
+                    <div class="p-6 bg-slate-900 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-xl font-extrabold tracking-tight">BINOM JAS TEACHERS – Жас педагогтер желісі</h3>
+                            <p class="text-sky-300 text-xs">Жылдық жұмыс жоспары мен орталықтандырылған іс-шаралар</p>
+                        </div>
+                        <span class="px-3 py-1 bg-sky-500/30 text-sky-200 border border-sky-400/30 rounded-full text-xs font-bold">
+                            2026-2027 жж.
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto p-4">
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 uppercase font-bold border-b border-slate-200">
+                                    <th class="p-3 w-12 text-center">№</th>
+                                    <th class="p-3">Мазмұны / Идея</th>
+                                    <th class="p-3">Мерзімі</th>
+                                    <th class="p-3">Өтетін орны</th>
+                                    <th class="p-3">Жауапты</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">1</td>
+                                    <td class="p-3 font-semibold">Welcome Day - Тимбилдинг</td>
+                                    <td class="p-3 text-slate-500">Қыркүйек</td>
+                                    <td class="p-3">Қадыр Мырза Әлі Binom school</td>
+                                    <td class="p-3">Ибраева А.А., Интыкпаева Б.Т.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">2</td>
+                                    <td class="p-3 font-semibold">"Kitap Quiz" білім бәйгесі</td>
+                                    <td class="p-3 text-slate-500">4 қыркүйек</td>
+                                    <td class="p-3">Қадыр Мырза Әлі Binom school</td>
+                                    <td class="p-3">Ибраева А.А., Раева А.Ж., Интыкпаева Б.Т.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">3</td>
+                                    <td class="p-3 font-semibold">Сабақтағы 4K: оқушының ойлау, коммуникация және ынтымақтастық дағдыларын дамыту (Тренинг)</td>
+                                    <td class="p-3 text-slate-500">Қазан</td>
+                                    <td class="p-3">Әлихан Бөкейхан Binom school</td>
+                                    <td class="p-3">Рахимбекова А.Р.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">4</td>
+                                    <td class="p-3 font-semibold">«Жас маманға арналған педагогикалық лайфхактар» шеберлік сабақтары</td>
+                                    <td class="p-3 text-slate-500">Қараша</td>
+                                    <td class="p-3">Әбіш Кекілбаев Binom school</td>
+                                    <td class="p-3">Ибрайбекова А.Н., Халелова Ш.Д.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">5</td>
+                                    <td class="p-3 font-semibold">«Педагогикалық стартап». Педагогикалық жобалар</td>
+                                    <td class="p-3 text-slate-500">Желтоқсан</td>
+                                    <td class="p-3">Ыбырай Алтынсарин Binom school</td>
+                                    <td class="p-3">—</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">6</td>
+                                    <td class="p-3 font-semibold">«PLC: бірлескен ізденіс – сапалы нәтиже» PLC / тәжірибе алмасу</td>
+                                    <td class="p-3 text-slate-500">Қаңтар</td>
+                                    <td class="p-3">А.Байтұрсынұлы ат. Binom school</td>
+                                    <td class="p-3">Кудабаев Н.А., Капан З.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">7</td>
+                                    <td class="p-3 font-semibold">«Жас ұстаздың кәсіби хикаялары». «Күлкілі, бірақ шындық» StandUp</td>
+                                    <td class="p-3 text-slate-500">Ақпан</td>
+                                    <td class="p-3">Қадыр Мырза Әлі Binom school</td>
+                                    <td class="p-3">Ибраева А.А., Интыкпаева Б.Т.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">8</td>
+                                    <td class="p-3 font-semibold">«Нетворкинг: жаңа мүмкіндіктер алаңы» Кәсіби нетворкинг</td>
+                                    <td class="p-3 text-slate-500">Наурыз</td>
+                                    <td class="p-3">Әбіш Кекілбаев Binom school</td>
+                                    <td class="p-3">Ибрайбекова А.Н., Халелова Ш.Д.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="p-3 text-center font-bold text-sky-600">9</td>
+                                    <td class="p-3 font-semibold">«Level UP: тәжірибеден нәтижеге» Форум</td>
+                                    <td class="p-3 text-slate-500">Сәуір</td>
+                                    <td class="p-3">Қадыр Мырза Әлі Binom school</td>
+                                    <td class="p-3">Ибраева А.А., Интыкпаева Б.Т.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 10: REGULATORY FRAMEWORK (НҚА ТІЗБЕСІ) -->
+        <section id="nqa" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="px-3.5 py-1.5 bg-slate-200 text-slate-800 font-bold text-xs uppercase rounded-full inline-block">
+                        LEGAL FRAMEWORK
+                    </span>
+                    <h2 id="nqaTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Нормативтік-құқықтық актілер (НҚА) тізбесі
+                    </h2>
+                    <p class="text-slate-500 text-sm">Педагог қызметіндегі негізгі заңдар мен қаулылар сілтемелері</p>
+                </div>
+
+                <!-- NQA Table -->
+                <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-800 uppercase font-bold">
+                                    <th class="p-4 w-12 text-center">№</th>
+                                    <th class="p-4">Құжат атауы / Түсініктеме</th>
+                                    <th class="p-4 w-40 text-center">Сілтеме</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-slate-700">
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">1</td>
+                                    <td class="p-4 font-semibold">«Қазақстан Республикасының Конституциясы»</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/K2600000000" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">2</td>
+                                    <td class="p-4 font-semibold">«Білім туралы» Қазақстан Республикасының 2007 жылғы 27 шілдедегі № 319 Заңы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/Z0700000319_" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">3</td>
+                                    <td class="p-4 font-semibold">«Жасанды интеллект туралы» ҚАЗақстан Республикасының Заңы 2025 жылғы 17 қарашадағы № 230-VIII ҚРЗ.</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/Z2500000230" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">4</td>
+                                    <td class="p-4 font-semibold">«Педагог мәртебесі туралы» Қазақстан Республикасының Заңы 2019 жылғы 27 желтоқсандағы № 293-VІ ҚРЗ.</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/Z1900000293" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">5</td>
+                                    <td class="p-4 font-semibold">ҚР Президентінің 2026 жылғы 12 мамырдағы «Орта білім беру жүйесіне жасанды интеллектіні ендіру жөніндегі шаралар туралы» Жарлығы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://surl.li/wzhifu" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">surl.li</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">6</td>
+                                    <td class="p-4 font-semibold">«Келешек мектептері» пилоттық ұлттық жобасын бекіту туралы ҚР Үкіметінің 2022 ж. № 963 қаулысы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2200000963" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">7</td>
+                                    <td class="p-4 font-semibold">Мектепке дейінгі, орта, ТЖКБ дамытудың 2023–2029 жылдарға арналған тұжырымдамасы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2300000249" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">8</td>
+                                    <td class="p-4 font-semibold">2026 – 2030 жылдарға арналған «Қазақстан балалары» тұжырымдамасын бекіту туралы ҚРҮ № 56 қаулысы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2600000056" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">9</td>
+                                    <td class="p-4 font-semibold">Балаларды зорлық-зомбылықтан қорғау және суицидтің алдын алу 2023–2025 кешенді жоспары</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2300000748" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">10</td>
+                                    <td class="p-4 font-semibold">ҚР инклюзивті саясаттың 2025 – 2030 жылдарға арналған тұжырымдамасы № 1143 қаулысы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2400001143" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white transition">
+                                    <td class="p-4 text-center font-bold text-sky-600">11</td>
+                                    <td class="p-4 font-semibold">ҚР шахматты дамытудың 2023 – 2027 жылдарға арналған кешенді жоспары № 576 қаулысы</td>
+                                    <td class="p-4 text-center">
+                                        <a href="https://adilet.zan.kz/kaz/docs/P2300000576" target="_blank" class="px-3 py-1.5 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition inline-block">adilet.zan.kz</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Course Modal Dialog -->
+    <div id="addCourseModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold text-slate-900">Жаңа курс қосу</h3>
+                <button onclick="closeAddCourseModal()" class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Курс / Іс-шара атауы (KZ):</label>
+                    <input type="text" id="newCourseKZ" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Название курса / Мероприятия (RU):</label>
+                    <input type="text" id="newCourseRU" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Сілтеме / Веб-сайт (қалауыңызша):</label>
+                    <input type="url" id="newCourseLink" placeholder="https://..." class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAddCourseModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs">Бас тарту</button>
+                <button onclick="saveNewCourse()" class="px-4 py-2 bg-sky-600 text-white font-bold rounded-xl text-xs hover:bg-sky-700">Қосу / Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-sky-600 text-white rounded-xl font-black text-lg">ALL</div>
+                <div>
+                    <span class="text-white font-extrabold text-lg block">ALLQADAM</span>
+                    <span class="text-xs text-slate-400">Қадыр Мырза Әлі атындағы Binom school мектеп-лицейі</span>
+                </div>
+            </div>
+
+            <p class="text-xs text-center md:text-right text-slate-500">
+                &copy; 2026 ALLQadam Community. Барлық құқықтар қорғалған.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'kz';
+        
+        // Qualification Courses Data List (NO percentages displayed!)
+        let defaultCourses = [
+            { id: 1, kz: "Апгрейд курстары", ru: "Апгрейд курсы", link: "" },
+            { id: 2, kz: "Сыныпты басқару курсы", ru: "Курсы управления классом", link: "" },
+            { id: 3, kz: "Нобел фестивалі", ru: "Нобелевский фестиваль", link: "" },
+            { id: 4, kz: "PISA, PIRLS курстары", ru: "Курсы PISA, PIRLS", link: "" },
+            { id: 5, kz: "LMS жүйесі білім беру", ru: "Обучение LMS", link: "https://lms.bi.education/login/index.php?loginredirect=1" },
+            { id: 6, kz: "SEL (Әлеуметтік-эмоционалды оқыту)", ru: "SEL (Социально-эмоциональное обучение)", link: "" },
+            { id: 7, kz: "Лейла Мирас тренингтері", ru: "Тренинги Лейлы Мирас", link: "" },
+            { id: 8, kz: "ATYRAU Teacher Summit", ru: "ATYRAU Teacher Summit", link: "" },
+            { id: 9, kz: "New Vision форумдары", ru: "Форум New Vision", link: "" },
+            { id: 10, kz: "Түркістан тамыз кеңесі", ru: "Туркестанский августовский совет", link: "" },
+            { id: 11, kz: "Пәндік құзыреттілік", ru: "Предметная компетентность", link: "" },
+            { id: 12, kz: "Робототехника және IT", ru: "Робототехника и IT", link: "" },
+            { id: 13, kz: "Инклюзивті білім беру", ru: "Инклюзивное образование", link: "" },
+            { id: 14, kz: "Нұрдәулет Абылай семинарлары", ru: "Семинары Нурдаулета Абылая", link: "" }
+        ];
+
+        // Load custom user added courses from localStorage if available
+        let savedCourses = JSON.parse(localStorage.getItem('allqadam_custom_courses') || '[]');
+        let courses = [...defaultCourses, ...savedCourses];
+
+        const translations = {
+            kz: {
+                navSubtitle: "Жас мамандар қауымдастығы",
+                navAbout: "Біз туралы",
+                navAdmin: "Әкімшілік",
+                navCreators: "Құрушылар",
+                navYoungTeachers: "Жас ұстаздар мектебі",
+                navChecklist: "Шек-лист",
+                navQualification: "Біліктілік",
+                navBase: "Материалдар",
+                navEvents: "Іс-шаралар",
+                navNqa: "НҚА",
+                mottoLabel: "ҰРАН - ДЕВИЗ",
+                mottoText: "(Алғашқы қадамнан - сенімділікке)",
+                galleryTitle: "Фото галерея",
+                gallerySubtitle: "Сообществомыздың белсенді сәттері мен іс-шаралары",
+                aboutMainHeading: "Алғашқы қадам. Жаңа мүмкіндіктер. Үлкен кәсіби болашақ.",
+                aboutDescription: "ALLQADAM — жас мамандарға арналған кәсіби қолдау және жаңа мүмкіндіктер кеңістігі. Біз жайында толық ақпаратты инстаграмнан да көре аласыздар:",
+                missionHeading: "Біздің миссиямыз",
+                missionText: "Жас мамандар тәжірибе жинақтап, өз идеяларын жүзеге асыра алатын орта қалыптастыру.",
+                pillarsHeader: "Мұнда сен:",
+                p1Title: "Тәжірибе",
+                p1Text: "Пайдалы материалдар және әдістемелік құралдар аласыз.",
+                p2Title: "Қауымдастық",
+                p2Text: "Пікірлес жандармен танысып, тәлімгерлерден қолдау аласыз.",
+                p3Title: "Мүмкіндіктер",
+                p3Text: "Жобаларға, байқауларға және түрлі іс-шараларға қатысасыз.",
+                p4Title: "Идеялар",
+                p4Text: "Өз бастамаңды ұсынып, оны нақты жобаға айналдырасыз.",
+                valuesTitle: "Басшылыққа алатын құндылықтар",
+                directionsTitle: "Негізгі бағыттар",
+                dir1Title: "Кәсіби даму",
+                dir1Text: "Курстар, шеберлік сабақтары, тренингтер, вебинарлар және практикалық ресурстар.",
+                dir2Title: "Тәлімгерлік",
+                dir2Text: "Тәжірибелі әріптестер мен кәсіби тәлімгерлерден қолдау алу мүмкіндіктері.",
+                dir3Title: "Жобалық жұмыс",
+                dir3Text: "Жеке білім беру және әлеуметтік жобаларды әзірлеу әрі жүзеге асыру.",
+                adminHeaderTitle: "Әкімшілік",
+                dirBadge: "Мектеп директоры",
+                dirName: "Омаров Сәтжан Кәрібайұлы",
+                dirTitle: "Қадыр Мырза Әлі атындағы Binom school мектеп-лицейінің директоры",
+                adminTeamTitle: "Басшылық құрам",
+                creatorsTitle: "ALL Qadam қауымдастығын құрушылар",
+                creatorsSubtitle: "Біз — мектепте жай ғана жұмыс істеуді емес, жаңа дүниелер жасап, дамып, бірге алға ұмтылуды мақсат еткен екі жас ұстазбыз.",
+                c1Subject: "Орыс тілі мен әдебиеті пәнінің мұғалімі",
+                c1Quote: "Қарапайым сабақты қарым-қатынасқа, шығармашылыққа және жаңа идеяларға толы ортаға айналдырғанды ұнатамын. Меніңше, жақсы мұғалім — барлық сұрақтың жауабын білетін адам емес, өзі де үнемі ізденіп, үйреніп, жаңаны байқап көруден қорықпайтын адам.",
+                c2Subject: "Информатика пәнінің мұғалімі",
+                c2Quote: "Заманауи мұғалім — оқушыларымен бірге үнемі дамып отыратын тұлға деп сенемін. Заманауи технологиялар мен цифрлық құралдарға қызығамын және оқуды қызықты, түсінікті әрі пайдалы етудің жаңа жолдарын іздеймін.",
+                moHeadsTitle: "Әдістемелік бірлестіктер жетекшілері",
+                checklistHeader: "Жас маманның алғашқы қадамдары",
+                checklistSub: "Жұмысқа орналасу және бейімделу бойынша интерактивті бақылау тізімі",
+                qualTitle: "Педагогтердің кәсіби біліктілігін жетілдіру",
+                qualSub: "Біліктілікті арттыру курстары мен семинарлар тізімі (пайыздарсыз)",
+                baseTitle: "Жас маманға арналған база",
+                baseSub: "Күнделікті жұмыста қолдануға болатын практикалық құжаттар мен шаблондар жинағы",
+                eventsMainTitle: "Іс-шаралар тізімі & BINOM JAS TEACHERS",
+                nqaTitle: "Нормативтік-құқықтық актілер (НҚА) тізбесі"
+            },
+            ru: {
+                navSubtitle: "Сообщество молодых специалистов",
+                navAbout: "О нас",
+                navAdmin: "Администрация",
+                navCreators: "Создатели",
+                navYoungTeachers: "Школа молодых педагогов",
+                navChecklist: "Чек-лист",
+                navQualification: "Квалификация",
+                navBase: "Материалы",
+                navEvents: "Мероприятия",
+                navNqa: "НПА",
+                mottoLabel: "ДЕВИЗ - ДЕВИЗ",
+                mottoText: "(От первого шага - к уверенности.)",
+                galleryTitle: "Фотогалерея",
+                gallerySubtitle: "Яркие моменты и мероприятия нашего сообщества",
+                aboutMainHeading: "Первый шаг. Новые возможности. Большое профессиональное будущее.",
+                aboutDescription: "ALLQADAM — это пространство для молодых специалистов, где можно учиться, пробовать, создавать и расти вместе. Полная информация доступна в нашем Instagram:",
+                missionHeading: "Наша миссия",
+                missionText: "Создать среду, в которой молодой специалист получает возможности для практики и пространство для реализации своих идей.",
+                pillarsHeader: "Здесь собраны всё, что может пригодиться на старте:",
+                p1Title: "Опыт",
+                p1Text: "Обучение, методические материалы и полезные инструменты.",
+                p2Title: "Сообщество",
+                p2Text: "Единомышленники, наставники и профессиональные связи.",
+                p3Title: "Возможности",
+                p3Text: "Проекты, конкурсы, мероприятия и новые направления для роста.",
+                p4Title: "Идеи",
+                p4Text: "Пространство, где твою инициативу можно превратить в реальный проект.",
+                valuesTitle: "Ценности, которых мы придерживаемся",
+                directionsTitle: "Основные направления",
+                dir1Title: "Профессиональное развитие",
+                dir1Text: "Курсы, мастер-классы, тренинги, вебинары и практические ресурсы.",
+                dir2Title: "Наставничество",
+                dir2Text: "Возможность получить поддержку опытных коллег и профессиональных менторов.",
+                dir3Title: "Проектная работа",
+                dir3Text: "Разработка и реализация личных образовательных и социальных проектов.",
+                adminHeaderTitle: "Администрация",
+                dirBadge: "Директор школы",
+                dirName: "Омаров Сатжан Карибаевич",
+                dirTitle: "Директор школы-лицея Binom school имени Кадыра Мырза Али",
+                adminTeamTitle: "Руководящий состав",
+                creatorsTitle: "Создатели сообщества ALL Qadam",
+                creatorsSubtitle: "Мы — два молодых специалиста, которых объединило желание не просто работать в школе, а создавать, развиваться и идти вперёд вместе.",
+                c1Subject: "Учитель русского языка и литературы",
+                c1Quote: "Люблю превращать обычный урок в пространство для общения, творчества и поиска новых идей. Верю, что хороший учитель — это не тот, кто знает ответы на все вопросы, а тот, кто сам продолжает учиться и не боится пробовать новое.",
+                c2Subject: "Учитель информатики",
+                c2Quote: "Убеждена, что современный учитель — это человек, который постоянно развивается вместе со своими учениками. Интересуюсь современными технологиями, цифровыми инструментами и ищу способы сделать обучение интересным, понятным и полезным.",
+                moHeadsTitle: "Руководители методических объединений (МО)",
+                checklistHeader: "Первые шаги молодого специалиста",
+                checklistSub: "Интерактивный чек-лист адаптации и приема на работу",
+                qualTitle: "Повышение профессиональной квалификации педагогов",
+                qualSub: "Перечень курсов повышения квалификации и мероприятий (без процентов)",
+                baseTitle: "База молодого специалиста",
+                baseSub: "Сборник практических материалов и документов для ежедневной работы",
+                eventsMainTitle: "Список мероприятий & BINOM JAS TEACHERS",
+                nqaTitle: "Перечень нормативно-правовых актов (НПА)"
+            }
+        };
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Toggle active styling on language buttons
+            const btnKZ = document.getElementById('langKZ');
+            const btnRU = document.getElementById('langRU');
+            if (lang === 'kz') {
+                btnKZ.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 bg-sky-600 text-white shadow";
+                btnRU.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
+            } else {
+                btnRU.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 bg-sky-600 text-white shadow";
+                btnKZ.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
+            }
+
+            // Translate text elements by ID
+            const dict = translations[lang];
+            for (let id in dict) {
+                const el = document.getElementById(id);
+                if (el) el.innerText = dict[id];
+            }
+
+            // Update Administration cards
+            document.querySelectorAll('.admin-name').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.innerText = text;
+            });
+            document.querySelectorAll('.admin-pos').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.innerText = text;
+            });
+
+            // Update MO cards
+            document.querySelectorAll('.mo-title').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.innerText = text;
+            });
+
+            // Re-render courses grid according to language
+            renderCourses();
+        }
+
+        let canvas, ctx;
+        let walkPos = 0;
+        let animFrameId;
+
+        function initLogoCanvas() {
+            canvas = document.getElementById('logoCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            
+            // Set scale according to bounding box
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width || 500;
+            canvas.height = rect.height || 280;
+
+            drawLogoCanvas();
+        }
+
+        function drawLogoCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Dark Metallic Background Grid
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const text1 = "ALL";
+            const text2 = "QADAM";
+            
+            ctx.font = '900 48px Inter, sans-serif';
+            ctx.textAlign = 'left';
+
+            // Walking figure position along X
+            walkPos += 1.5;
+            if (walkPos > canvas.width + 60) walkPos = -40;
+
+            // Render ALL QADAM text with shattering effect behind walking figure
+            const startX = 60;
+            const startY = 120;
+
+            // Draw line 1: ALL
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillText(text1, startX, startY);
+
+            // Draw line 2: QADAM with crack effect
+            const text2X = startX;
+            const text2Y = startY + 60;
+
+            for (let i = 0; i < text2.length; i++) {
+                const char = text2[i];
+                const charX = text2X + i * 42;
+
+                // Check distance from walking person
+                const dist = walkPos - charX;
+
+                ctx.save();
+                if (dist > 0 && dist < 120) {
+                    // Behind figure: Letters shatter and tilt!
+                    ctx.translate(charX + 15, text2Y - 15);
+                    ctx.rotate((Math.sin(dist / 10) * 0.2));
+                    ctx.fillStyle = '#f87171'; // Red/shattered warning state
+                    ctx.fillText(char, -15, 15);
+                    
+                    // Draw crack lines
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.moveTo(-10, -10);
+                    ctx.lineTo(10, 10);
+                    ctx.stroke();
+                } else if (dist <= 0) {
+                    // Ahead of figure: Restored normal pristine letter!
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillText(char, charX, text2Y);
+                } else {
+                    // Fully healed behind after passing!
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(char, charX, text2Y);
+                }
+                ctx.restore();
+            }
+
+            // Draw Walking Figure Silhouette
+            ctx.save();
+            ctx.translate(walkPos, text2Y - 20);
+            
+            // Stylized walking person (Head, Body, Leg animation)
+            const legAngle = Math.sin(walkPos * 0.1) * 0.4;
+
+            // Head
+            ctx.fillStyle = '#a855f7';
+            ctx.beginPath();
+            ctx.arc(0, -35, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Torso
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 6;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(0, -25);
+            ctx.lineTo(0, 5);
+            ctx.stroke();
+
+            // Legs
+            ctx.beginPath();
+            ctx.moveTo(0, 5);
+            ctx.lineTo(Math.sin(legAngle) * 15, 25);
+            ctx.moveTo(0, 5);
+            ctx.lineTo(-Math.sin(legAngle) * 15, 25);
+            ctx.stroke();
+
+            ctx.restore();
+
+            animFrameId = requestAnimationFrame(drawLogoCanvas);
+        }
+
+        function triggerLogoAnim() {
+            walkPos = -40;
+        }
+
+        function scrollCarousel(dir) {
+            const container = document.getElementById('galleryCarousel');
+            if (container) container.scrollBy({ left: dir * 320, behavior: 'smooth' });
+        }
+
+        function scrollAdminCarousel(dir) {
+            const container = document.getElementById('adminCarousel');
+            if (container) container.scrollBy({ left: dir * 300, behavior: 'smooth' });
+        }
+
+        function saveCheckState(stepNum) {
+            const chk = document.getElementById(`chk${stepNum}`);
+            if (chk) {
+                localStorage.setItem(`allqadam_chk_${stepNum}`, chk.checked ? 'true' : 'false');
+            }
+        }
+
+        function loadChecklistState() {
+            for (let i = 1; i <= 6; i++) {
+                const saved = localStorage.getItem(`allqadam_chk_${i}`);
+                const chk = document.getElementById(`chk${i}`);
+                if (chk && saved === 'true') {
+                    chk.checked = true;
+                }
+            }
+        }
+
+        function renderCourses() {
+            const container = document.getElementById('coursesGrid');
+            if (!container) return;
+
+            const query = (document.getElementById('courseSearch')?.value || '').toLowerCase();
+            container.innerHTML = '';
+
+            const filtered = courses.filter(c => {
+                const title = currentLang === 'kz' ? c.kz : c.ru;
+                return title.toLowerCase().includes(query);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center text-slate-400 py-8 text-sm">Курстар табылмады / Курсы не найдены</p>`;
+                return;
+            }
+
+            filtered.forEach(c => {
+                const title = currentLang === 'kz' ? c.kz : c.ru;
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-3";
+                
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <span class="inline-block px-2.5 py-0.5 bg-sky-50 text-sky-700 font-bold text-xs rounded-md border border-sky-100">
+                            <i class="fa-solid fa-graduation-cap mr-1"></i> Курс / Семинар
+                        </span>
+                        <h4 class="font-bold text-slate-900 text-base">${title}</h4>
+                    </div>
+                    ${c.link ? `
+                        <a href="${c.link}" target="_blank" class="text-xs font-bold text-sky-600 hover:text-sky-800 flex items-center gap-1 self-start">
+                            Платформаға өту <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    ` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterCourses() {
+            renderCourses();
+        }
+
+        function openAddCourseModal() {
+            document.getElementById('addCourseModal')?.classList.remove('hidden');
+        }
+
+        function closeAddCourseModal() {
+            document.getElementById('addCourseModal')?.classList.add('hidden');
+        }
+
+        function saveNewCourse() {
+            const kzVal = document.getElementById('newCourseKZ')?.value;
+            const ruVal = document.getElementById('newCourseRU')?.value;
+            const linkVal = document.getElementById('newCourseLink')?.value;
+
+            if (!kzVal || !ruVal) {
+                alert("Курс атауын екі тілде де толтырыңыз!");
+                return;
+            }
+
+            const newCourse = {
+                id: Date.now(),
+                kz: kzVal,
+                ru: ruVal,
+                link: linkVal || ""
+            };
+
+            savedCourses.push(newCourse);
+            localStorage.setItem('allqadam_custom_courses', JSON.stringify(savedCourses));
+            courses.push(newCourse);
+
+            renderCourses();
+            closeAddCourseModal();
+
+            // Clear inputs
+            document.getElementById('newCourseKZ').value = '';
+            document.getElementById('newCourseRU').value = '';
+            document.getElementById('newCourseLink').value = '';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        window.onload = function() {
+            initLogoCanvas();
+            loadChecklistState();
+            renderCourses();
+        };
+
+        window.onresize = function() {
+            if (canvas) {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width || 500;
+                canvas.height = rect.height || 280;
+            }
+        };
+    </script>
+</body>
+</html>
